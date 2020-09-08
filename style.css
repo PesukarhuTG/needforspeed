@@ -1,0 +1,15 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.hide {
+    display: none;
+}
+
+.car {
+    width: 100px;
+    height: 200px;
+    background: transparent url('./image/player.png') center / cover no-repeat;
+}
