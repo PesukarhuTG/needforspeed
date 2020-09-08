@@ -37,8 +37,10 @@ function playGame() {
 }
 
 function startRun(event) {
+    if (event.key !== 'F5' && event.key !== 'F12') {
     event.preventDefault();
     keys[event.key] = true;
+    }
 }
 
 function stopRun(event) {
