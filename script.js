@@ -46,8 +46,7 @@ function startGame() {
     //для создания автомобилей
     for (let i = 0; i < getQuantityElemenets(100 * setting.traffic); i++) {
         const enemy = document.createElement('div');
-        const randomEnemy = Math.floor(Math.random() * MAX_ENEMY);
-        console.log(randomEnemy);
+        const randomEnemy = Math.floor(Math.random() * MAX_ENEMY) + 1;
         enemy.classList.add('enemy');
         enemy.y = -100 * setting.traffic * (i + 1); //-100 т.е. другие авто выше поля игры
         enemy.style.left = Math.floor(Math.random() * (gameArea.offsetWidth - 50)) + 'px'; //расположение соперников
