@@ -90,15 +90,17 @@ function playGame() {
 }
 
 function startRun(event) {
-    if (event.key !== 'F5' && event.key !== 'F12') {
-    event.preventDefault();
-    keys[event.key] = true;
+    if (keys.hasOwnProperty(event.key)) {
+        event.preventDefault();
+        keys[event.key] = true;
     }
 }
 
-function stopRun(event) {
-    event.preventDefault();
-    keys[event.key] = false;
+function stopRun(event) { 
+    if (keys.hasOwnProperty(event.key)) {
+        event.preventDefault();
+        keys[event.key] = false;
+    }
 }
 
 //ф-ция движения дороги
