@@ -1,3 +1,5 @@
+const MAX_ENEMY = 7;
+
 const score = document.querySelector('.score'),
       start = document.querySelector('.start'),
       gameArea = document.querySelector('.gameArea'),
@@ -36,7 +38,7 @@ function startGame() {
     for (let i = 0; i < getQuantityElemenets(100); i++) {
         const line = document.createElement('div');
         line.classList.add('line');
-        line.style.top = (i * 100) + 'px'; //расстояние от верха игорового пространства
+        line.style.top = `${i * 100}px`; //расстояние от верха игорового пространства
         line.y = i * 100; // для движения линий
         gameArea.appendChild(line);
     }
@@ -44,11 +46,13 @@ function startGame() {
     //для создания автомобилей
     for (let i = 0; i < getQuantityElemenets(100 * setting.traffic); i++) {
         const enemy = document.createElement('div');
+        const randomEnemy = Math.floor(Math.random() * MAX_ENEMY);
+        console.log(randomEnemy);
         enemy.classList.add('enemy');
         enemy.y = -100 * setting.traffic * (i + 1); //-100 т.е. другие авто выше поля игры
         enemy.style.left = Math.floor(Math.random() * (gameArea.offsetWidth - 50)) + 'px'; //расположение соперников
         enemy.style.top = enemy.y +'px'; //расстояние от верха игорового пространства
-        enemy.style.background = 'transparent url(image/enemy2.png) center / cover no-repeat';
+        enemy.style.background = `transparent url(./image/enemy${randomEnemy}.png) center / cover no-repeat`;
         gameArea.appendChild(enemy);
     }
 
