@@ -41,7 +41,10 @@ function getQuantityElemenets(heightElement) {
 function startGame() {
     start.classList.add('hide');
 
-    //для линий разделения
+    //очистка поля перед запуском (в случае столкновения)
+    gameArea.innerHTML = '';
+
+    //линия разделения
     for (let i = 0; i < getQuantityElemenets(100); i++) {
         const line = document.createElement('div');
         line.classList.add('line');
@@ -50,7 +53,7 @@ function startGame() {
         gameArea.append(line);
     }
 
-    //для создания автомобилей
+    //создание автомобилей
     for (let i = 0; i < getQuantityElemenets(100 * setting.traffic); i++) {
         const enemy = document.createElement('div');
         const randomEnemy = Math.floor(Math.random() * MAX_ENEMY) + 1;
@@ -62,10 +65,16 @@ function startGame() {
         gameArea.append(enemy);
     }
 
+    setting.score = 0;
     setting.start = true;
     
     gameArea.append(car);
+    car.style.left = gameArea.offsetWidth/2-car.offsetWidth/2;
+    car.style.top = 'auto';
+    car.style.bottom = '10px';
+
     document.body.append(audio);
+    
     setting.x = car.offsetLeft; //от левого края блока родителя до элемента
     setting.y = car.offsetTop; //от края верха родителя до бампера авто
     requestAnimationFrame(playGame);
@@ -74,6 +83,8 @@ function startGame() {
 function playGame() {
     
     if (setting.start) {
+        setting.score += setting.speed; //увеличение очков
+        score.innerHTML = 'SCORE:<br>' + setting.score;
         moveRoad();//после запуска игры двигаются линии разметки
         moveEnemy();//после запуска игры двигаются авто соперников
 
@@ -143,7 +154,8 @@ function moveEnemy() {
            setting.start = false;
            audio.remove();
            console.warn('ДТП');
-
+           start.classList.remove('hide');
+           start.style.top = score.offsetHeight; //кнопка start ниже score
        }
  
 
