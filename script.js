@@ -5,6 +5,13 @@ const score = document.querySelector('.score'),
       gameArea = document.querySelector('.gameArea'),
       car = document.createElement('div');
 
+//добавление аудио
+const audio = document.createElement('embed');
+audio.src = 'audio.mp3';
+audio.type = 'audio/mp3';
+audio.style.cssText = `position: absolute; top: -1000px;`;
+
+
 car.classList.add('car');
 
 start.addEventListener('click', startGame);
@@ -40,7 +47,7 @@ function startGame() {
         line.classList.add('line');
         line.style.top = `${i * 100}px`; //расстояние от верха игорового пространства
         line.y = i * 100; // для движения линий
-        gameArea.appendChild(line);
+        gameArea.append(line);
     }
 
     //для создания автомобилей
@@ -52,12 +59,13 @@ function startGame() {
         enemy.style.left = Math.floor(Math.random() * (gameArea.offsetWidth - 50)) + 'px'; //расположение соперников
         enemy.style.top = enemy.y +'px'; //расстояние от верха игорового пространства
         enemy.style.background = `transparent url(./image/enemy${randomEnemy}.png) center / cover no-repeat`;
-        gameArea.appendChild(enemy);
+        gameArea.append(enemy);
     }
 
     setting.start = true;
     
-    gameArea.appendChild(car);
+    gameArea.append(car);
+    document.body.append(audio);
     setting.x = car.offsetLeft; //от левого края блока родителя до элемента
     setting.y = car.offsetTop; //от края верха родителя до бампера авто
     requestAnimationFrame(playGame);
