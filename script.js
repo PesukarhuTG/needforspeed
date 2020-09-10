@@ -133,6 +133,20 @@ function moveEnemy() {
     let enemies = document.querySelectorAll('.enemy');
 
     enemies.forEach(function(element) {
+       //позиция объекта, чтобы не сталкивались
+       let carRect = car.getBoundingClientRect(); //позиция нашего авто
+       let enemyRect = element.getBoundingClientRect(); //позиция соперника
+       if (carRect.top <= enemyRect.bottom &&
+        carRect.right >= enemyRect.left &&
+        carRect.left <= enemyRect.right &&
+        carRect.bottom >= enemyRect.top) {
+           setting.start = false;
+           audio.remove();
+           console.warn('ДТП');
+
+       }
+ 
+
         element.y += setting.speed / 2; //если не разделим, то авто двигаются с линиями (будто стоят)
         element.style.top = element.y + 'px';
 
