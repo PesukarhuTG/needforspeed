@@ -4,7 +4,8 @@ const HEIGHT_ELEM = 100;
 const score = document.querySelector('.score'),
       start = document.querySelector('.start'),
       gameArea = document.querySelector('.gameArea'),
-      car = document.createElement('div');
+      car = document.createElement('div'),
+      greetings = document.querySelector('.greetings');
 
 //добавление аудио
 const audio = document.createElement('embed');
@@ -17,6 +18,7 @@ car.classList.add('car');
 
 //рассчитываем высоту дороги, кратную HEIGHT_ELEM без остатка
 gameArea.style.height = Math.floor(document.documentElement.clientHeight / HEIGHT_ELEM) * HEIGHT_ELEM;
+gameArea.style.marginTop = (document.documentElement.clientHeight - gameArea.offsetHeight);
 
 start.addEventListener('click', startGame);
 document.addEventListener('keydown', startRun);
@@ -39,12 +41,11 @@ const setting = {
 
 let level = setting.level;
 
-
 //фиксация набранных очков
 const topScore = document.querySelector('#top-score');
 const getLocalStorage = () => parseInt(localStorage.getItem('needForJs_score', setting.score));
+
 topScore.textContent = `Best score: ${getLocalStorage() ? getLocalStorage() : 0}`;
-//localStorage.clear();
 
 //localStorage для хранения данных о набранных очках
 const addLocalStorage = () => {
@@ -139,7 +140,10 @@ function playGame() {
     
     if (setting.start) {
         setting.score += setting.speed; //увеличение очков зависит от установок скорости
-        score.innerHTML = 'SCORE:<br>' + setting.score;
+        score.innerHTML = 'SCORE: ' + setting.score;
+
+        topScore.style.top = score.offsetHeight; //блок BestTopниже score
+
         moveRoad();//после запуска игры двигаются линии разметки
         moveEnemy();//после запуска игры двигаются авто соперников
 
@@ -206,13 +210,13 @@ function moveEnemy() {
            carRect.right >= enemyRect.left &&
            carRect.left <= enemyRect.right &&
            carRect.bottom >= enemyRect.top) {
-           setting.start = false;
-           audio.remove();
-           console.warn('ДТП');
-           crash.play();
-           start.classList.remove('hide');
-           start.style.top = score.offsetHeight; //кнопка start ниже score
-           addLocalStorage();
+              setting.start = false;
+              audio.remove();
+              console.warn('ДТП');
+              crash.play();
+              start.classList.remove('hide');
+              greetings.innerHTML = 'Ooops... Try again! ^_^';
+              addLocalStorage();
        }
  
         element.y += setting.speed / 2; //если не разделим, то авто двигаются с линиями (будто стоят)
@@ -222,16 +226,6 @@ function moveEnemy() {
             element.y = -HEIGHT_ELEM * setting.traffic;
             element.style.left = Math.floor(Math.random() * (gameArea.offsetWidth - element.offsetWidth)) + 'px'; //меняем позицию
         }
-
-
-        /*if (element.y >= gameArea.offsetHeight) {
-            const checkTop = [...enemies].every(element => element.offsetTop > HEIGHT_ELEM);
-            if (checkTop) {
-                element.y = -HEIGHT_ELEM * setting.traffic;
-            }
-            element.style.left = Math.floor(Math.random() * (gameArea.offsetWidth - element.offsetWidth)) + 'px'; //меняем позицию
-        }*/
-
     });
 }
 
