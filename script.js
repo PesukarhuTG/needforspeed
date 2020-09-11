@@ -42,13 +42,14 @@ let level = setting.level;
 
 //фиксация набранных очков
 const topScore = document.querySelector('#top-score');
-const result = parseInt(localStorage.getItem('needForJs_score', setting.score));
-topScore.textContent = `Best score: ${result ? result : 0}`;
+const getLocalStorage = () => parseInt(localStorage.getItem('needForJs_score', setting.score));
+topScore.textContent = `Best score: ${getLocalStorage() ? getLocalStorage() : 0}`;
 //localStorage.clear();
 
 //localStorage для хранения данных о набранных очках
 const addLocalStorage = () => {
-    if (result < setting.score) {
+    const result = getLocalStorage();
+    if (!result || result < setting.score) {
         localStorage.setItem('needForJs_score', setting.score);
         topScore.textContent = `Best score: ${setting.score}`;
     }
