@@ -19,9 +19,16 @@
     position: absolute;
 }
 
+.game {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
 .gameArea {
     width: 300px;
-    height: 100vh;
+    height: 100%;
     position: relative;
     margin: auto;
     background: #222;
@@ -31,9 +38,19 @@
 .line {
     position: absolute;
     width: 10px;
-    height: 50px;
     background: #fff;
     left: 145px;
+}
+
+#top-score {
+    position: fixed;
+    bottom: 0;
+    height: 300px;
+    width: 300px;
+    padding: 80px;
+    font-size: 30px;
+    background: #000;
+    color: #fff;
 }
 
 .start {
@@ -42,7 +59,7 @@
     top: 0;
     width: 100%;
     margin: 0;
-    padding: 2rem 0;
+    padding: 1rem 0;
     z-index: 200;
     font-family: sans-serif;
     font-size: 1.5rem;
@@ -50,7 +67,6 @@
     color: #fff;
     text-align: center;
     background: #000;
-    cursor: pointer;
     border:0;
 }
 
@@ -68,4 +84,15 @@
     text-align: center;
     background: #000;
     border:0;
+}
+
+button {
+    cursor: pointer;
+    border: 1px solid #fff;
+    border-radius: 6px;
+    background: #000;
+    color: #fff;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    margin: 10px;
 }
