@@ -2,6 +2,11 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color: #0c3102;
+    background: url('./image/forest-bg.jpg') center / cover no-repeat;
+}
+
 .hide {
     display: none;
 }
@@ -44,13 +49,18 @@
 
 #top-score {
     position: fixed;
-    bottom: 0;
-    height: 300px;
-    width: 300px;
-    padding: 80px;
-    font-size: 30px;
-    background: #000;
-    color: #fff;
+    bottom: 50%;
+    /*width: 300px;
+    height: 300px;*/
+    padding: 20px 40px;
+    border-radius: 6px;
+    font-size: 1.7rem;
+    font-weight: 700;
+    line-height: 1.5;
+    text-align: center;
+    font-family: sans-serif;
+    background: #0c2804;
+    color: #ffff00;
 }
 
 .start {
@@ -62,11 +72,12 @@
     padding: 1rem 0;
     z-index: 200;
     font-family: sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
+    line-height: 1.5;
     font-weight: 700;
-    color: #fff;
+    color: #ffff00;
     text-align: center;
-    background: #000;
+    background: #0c2804;
     border:0;
 }
 
@@ -75,23 +86,24 @@
     left: 0;
     top: 0;
     width: 100%;
-    padding: 1rem 0;
+    padding: 1.5rem 0;
     z-index: 200;
     font-family: sans-serif;
     font-size: 1.5rem;
+    line-height: 1.3;
     font-weight: 500;
-    color: skyblue;
+    color: #fff;
     text-align: center;
-    background: #000;
+    background: #081b03;
     border:0;
 }
 
 button {
     cursor: pointer;
-    border: 1px solid #fff;
+    border: 1px solid #ffff00;
     border-radius: 6px;
     background: #000;
-    color: #fff;
+    color: #ffff00;
     font-size: 1.2rem;
     padding: 10px 20px;
     margin: 10px;
